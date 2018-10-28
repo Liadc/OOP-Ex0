@@ -226,6 +226,12 @@ public class Monom implements function{
         return false;
     }
 
+    /**
+     * This method will get a String 'str' and checks if it can be parsed into Double. returns true if it can,
+     * return false otherwise.
+     * @param str String, checks if this string is a double.
+     * @return Boolean, true if this string can be parsed to Double, false otherwise.
+     */
     private static boolean isDouble(String str) {
 	    try {
 	        Double.parseDouble(str);
@@ -236,10 +242,19 @@ public class Monom implements function{
         }
     }
 
-	private void set_coefficient(double a){
-		this._coefficient = a;
-	}
+    /**
+     * a Setter method to set the power for the monom.
+     * @param p Integer, (non negative). the power to set the value to.
+     */
 	private void set_power(int p) {
 		this._power = p;
 	}
+
+    /**
+     * a Setter method to set the coefficient for the monom.
+     * @param a Double, the coefficient to set the value to.
+     */
+    private void set_coefficient(double a){
+        this._coefficient = a;
+    }
 }

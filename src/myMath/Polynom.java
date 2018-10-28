@@ -8,23 +8,29 @@ import java.util.List;
 import myMath.Monom;
 
 /**
- * This class represents a Polynom with add, multiply functionality, it also should support the following:
+ * This class represents a Polynom with add, multiply functionality, it also supports the following:
  * 1. Riemann's Integral: https://en.wikipedia.org/wiki/Riemann_integral
  * 2. Finding a numerical value between two values (currently support root only f(x)=0).
  * 3. Derivative
  *
- * @author Boaz
+ * @author Liad & Timor
  */
 public class Polynom implements Polynom_able {
 
     private List<Monom> poly;
 
-
+    /**
+     * a Constructor for Polynom class. will initiate a polynom with the Zero monom.
+     */
     public Polynom() {
         poly = new ArrayList<>();
         poly.add(new Monom(0, 0));
     }
 
+    /**
+     * a Constructor for Polynom class using a String. will ignore spaces, and can use x and capital X for a monom.
+     * if the string is an invalid syntax for a polynom, will throw Runtime Exception.
+     */
     public Polynom(String str) {
         poly = new ArrayList<>();
         try {
@@ -44,6 +50,10 @@ public class Polynom implements Polynom_able {
         }
     }
 
+    /**
+     * a Copy-constructor performing a deep-copy of an other Polynom and initiate a new one with the same Monoms.
+     * @param p1 Polynom_able, the other Polynom to perform deep-copy on.
+     */
     public Polynom(Polynom_able p1){
         this.poly = new ArrayList<>();
         Iterator<Monom> p1Itr = p1.iteretor();
@@ -53,6 +63,11 @@ public class Polynom implements Polynom_able {
         }
     }
 
+    /**
+     * a copy Method performing a deep-copy of the CURRENT polynom, and initiate a new one with the same
+     * Monoms, then returns it.
+     * @return Polynom, a deep-copy of the current one.
+     */
     @Override
     public Polynom_able copy() {
         Polynom_able out = new Polynom();
@@ -64,6 +79,10 @@ public class Polynom implements Polynom_able {
         return out;
     }
 
+    /**
+     * This function returns an Integer represents the number of monoms inside this polynom.
+     * @return Integer, represents the number of monoms inside this polynom.
+     */
     public int size() {
 		return this.poly.size();
 	}
