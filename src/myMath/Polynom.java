@@ -5,15 +5,14 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import myMath.Monom;
-
 /**
- * This class represents a Polynom with add, multiply functionality, it also supports the following:
+ * This class represents a Polynom consisting Monoms, stored inside a list of type Monom.
+ * supports the following: add, multiply functionality, subtract, (monom or against polynom) it also supports the following:
  * 1. Riemann's Integral: https://en.wikipedia.org/wiki/Riemann_integral
  * 2. Finding a numerical value between two values (currently support root only f(x)=0).
  * 3. Derivative
  *
- * @author Liad & Timor
+ * @author Liad and Timor
  */
 public class Polynom implements Polynom_able {
 
@@ -29,6 +28,7 @@ public class Polynom implements Polynom_able {
     /**
      * a Constructor for Polynom class using a String. will ignore spaces, and can use x and capital X for a monom.
      * if the string is an invalid syntax for a polynom, will throw Runtime Exception.
+     * @param str the string to construct a polynom from.
      */
     public Polynom(String str) {
         poly = new ArrayList<>();
@@ -209,7 +209,7 @@ public class Polynom implements Polynom_able {
 
     /**
      * This function will receive two boundaries x1 and x0 (double), and an EPS, and finds the root of the current
-     * polynom within the area between x0 and x1 with eps=epsilon error margin. Assuming x1>x0, and f(x0)*f(x1) <0.
+     * polynom within the area between x0 and x1 with eps=epsilon error margin. Assuming x1 greater than x0, and f(x0)*f(x1) less than 0.
      * @param x0 starting point. (double)
      * @param x1 end point. (double)
      * @param eps step (positive) value. the error margin accepted must be equals or less than this value.
@@ -238,7 +238,7 @@ public class Polynom implements Polynom_able {
 
     /**
      * This function will receive two boundaries x1 and x0 (double), and an EPS, and calculates the area between
-     * the polynom to the X-axis (only positive area). assuming x1 > x0.
+     * the polynom to the X-axis (only positive area). assuming x1 greater than x0.
      * Compute Riemann's Integral over this Polynom starting from x0, till x1 using eps size steps,
      * see: https://en.wikipedia.org/wiki/Riemann_integral
      * @param x0 double, starting point.
@@ -248,17 +248,16 @@ public class Polynom implements Polynom_able {
      */
     @Override
     public double area(double x0, double x1, double eps) {
-        double totalwidth = (x1 - x0);
-        double deltax = totalwidth / eps;
+        double totalWidth = (x1 - x0);
+        double numOfReimanSums = totalWidth / eps;
         double sum = 0;
-        for (int i = 0; i < eps; i++) {
-            double p = this.f(x0 + i * deltax);
+        for (int i = 0; i < numOfReimanSums; i++) {
+            double p = this.f(x0 + i * eps);
             if (p > 0) {
-                p = deltax * p;
-                sum = sum + p;
+                sum += p;
             }
         }
-        return sum;
+        return sum*eps;
     }
 
     /**
@@ -286,7 +285,7 @@ public class Polynom implements Polynom_able {
 
     /**
      * This function will return an iterator of the current polynom, so we can iterate through the Monoms.
-     * @return Iterator<Monom>, the iterator of the ArrayList.
+     * @return Iterator (of type Monom), the iterator of the ArrayList.
      */
     @Override
     public Iterator<Monom> iteretor() {
