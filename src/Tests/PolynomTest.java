@@ -164,17 +164,22 @@ public class PolynomTest {
 
     @Test
     public void testRoot() {
-        Polynom p1 = new Polynom("3x+3");
-        System.out.println(p1);
-        System.out.println(p1.f(-100)+"   "+p1.f(100));
-        double root=p1.root(-100,100,0.01);
-        System.out.println(root);
-        double pos = p1.f(root);
-        System.out.println("wanted root "+root);
-        System.out.printf("pos: "+pos);
-        assertEquals("Should be 0",pos,0,0.001);
+    	try {
+			Polynom p1 = new Polynom("3*x^2+3");
+			System.out.println(p1);
+			System.out.println(p1.f(-100) + "   " + p1.f(100));
+			double root = p1.root(-100, 100, MonomTest.EPS / 2);
+			System.out.println(root);
+			double ans = p1.f(root); //ans should
+			System.out.println("wanted root " + root);
+			System.out.printf("pos: " + ans);
+			assertEquals("Should be 0", ans, 0, MonomTest.EPS);
+		}
+		catch (RuntimeException e){
+    		;//all ok.
+		}
 
-    }
+}
 /**
     @Test
     public void testRoot() {
