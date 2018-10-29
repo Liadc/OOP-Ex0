@@ -8,7 +8,8 @@ import java.util.List;
 import myMath.Monom;
 
 /**
- * This class represents a Polynom with add, multiply functionality, it also supports the following:
+ * This class represents a Polynom consisting Monoms, stored inside an ArrayList of type Monom.
+ * supports the following: add, multiply functionality, subtract, (monom or against polynom) it also supports the following:
  * 1. Riemann's Integral: https://en.wikipedia.org/wiki/Riemann_integral
  * 2. Finding a numerical value between two values (currently support root only f(x)=0).
  * 3. Derivative
