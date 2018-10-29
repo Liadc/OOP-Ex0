@@ -92,6 +92,17 @@ public class PolynomTest {
     }
 
     @Test
+    public void testPolynomString3() {
+        String s = "";
+        try {
+            Polynom p1 = new Polynom(s);
+            fail("an empty Polynom has been created");
+        }catch(Exception e){
+            //all ok
+        }
+    }
+
+    @Test
     public void testAddMonom() {
         Polynom p1 = new Polynom(_polys.get(0));
         Monom m1 = new Monom(_polys.get(1).iteretor().next());
@@ -119,17 +130,12 @@ public class PolynomTest {
 
     @Test
     public void testMultiplyPolynom() {
-        Polynom p1 = new Polynom(_polys.get(0));
-        Polynom p2 = new Polynom(_polys.get(1));
-        Polynom p3 = new Polynom(_polys.get(0));
-        Polynom p4 = new Polynom(_polys.get(0));
-
-        p1.multiply(p2);
-        p1.multiply(p3);
-        p2.multiply(p3);
-        p2.multiply(p4);
-        if (!p1.equals(p2)) {
-            fail("ERR - the polynoms should be the same");
+        Polynom p1 = new Polynom("x^2+4.5x+2");
+        Polynom p2 = new Polynom("x^3");
+        Polynom p3 = new Polynom("x^5+4.5x^4+2x^3");
+        p2.multiply(p1);
+        if(!p3.equals(p2)){
+            fail("Should be the same");
         }
     }
 
@@ -163,29 +169,51 @@ public class PolynomTest {
 
 
     @Test
-    public void testRoot() {
-    	try {
-			Polynom p1 = new Polynom("3*x^2+3");
-			System.out.println(p1);
-			System.out.println(p1.f(-100) + "   " + p1.f(100));
-			double root = p1.root(-100, 100, MonomTest.EPS / 2);
-			System.out.println(root);
-			double ans = p1.f(root); //ans should
-			System.out.println("wanted root " + root);
-			System.out.printf("pos: " + ans);
-			assertEquals("Should be 0", ans, 0, MonomTest.EPS);
-		}
-		catch (RuntimeException e){
-    		;//all ok.
-		}
-
-}
-/**
-    @Test
-    public void testRoot() {
-        Polynom p1 = _polys.get(0);
-
-                fail("Not yet implemented");
+    public void testRoot1() {
+            ArrayList<Polynom> goodarr = new ArrayList<>();
+            String[] goods = {"3x+5", "x^3+2","x^5-12","x^7+2","20x^5-20"};
+            for (String pol : goods) {
+                goodarr.add(new Polynom(pol));
+            }
+            for (Polynom poly : goodarr) {
+                double root = poly.root(-100,100,MonomTest.EPS);
+                double ans = poly.f(root); //ans should
+                assertEquals("Should be 0 ", ans, 0, MonomTest.EPS*100);
+            }
     }
-**/
+
+    @Test
+    public void testRoot2() {
+        try {
+            ArrayList<Polynom> badarr = new ArrayList<Polynom>();
+            String[] bads = {"3x^2+5", "x^2+4"};
+            for (String s : bads) {
+                badarr.add(new Polynom(s));
+            }
+            for (Polynom a : badarr) {
+                a.root(-100, 100, MonomTest.EPS);
+            }
+        } catch (Exception e) {
+            //all ok
+        }
+    }
+
+    @Test
+    public void testArea() {
+        Polynom p1 = new Polynom("x-3");
+        Polynom p2 = new Polynom("x");
+        Polynom p3 = new Polynom("x^3-27");
+        double p1area = p1.area(0, 10, MonomTest.EPS);
+        double p2area = p2.area(0, 7, MonomTest.EPS);
+        double p3area = p3.area(0,10,MonomTest.EPS);
+        double p4area = p3.area(2,10,MonomTest.EPS);
+        double p3suggetresult = 2290.75;
+        assertEquals("p1 area from 3 to 10 should be the same as p2 area from 0 to 7 ", p1area, p2area, MonomTest.EPS);
+
+        assertEquals("p3 area from 0 to 10 should be the same as p4 area from 2 to 10 ", p3area, p4area, MonomTest.EPS);
+
+        assertEquals("p3 isnt his suggest result ", p3suggetresult, p3area, MonomTest.EPS);
+
+    }
+
 }
