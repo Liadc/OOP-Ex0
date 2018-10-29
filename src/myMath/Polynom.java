@@ -248,17 +248,16 @@ public class Polynom implements Polynom_able {
      */
     @Override
     public double area(double x0, double x1, double eps) {
-        double totalwidth = (x1 - x0);
-        double deltax = totalwidth / eps;
+        double totalWidth = (x1 - x0);
+        double numOfReimanSums = totalWidth / eps;
         double sum = 0;
-        for (int i = 0; i < eps; i++) {
-            double p = this.f(x0 + i * deltax);
+        for (int i = 0; i < numOfReimanSums; i++) {
+            double p = this.f(x0 + i * eps);
             if (p > 0) {
-                p = deltax * p;
-                sum = sum + p;
+                sum += p;
             }
         }
-        return sum;
+        return sum*eps;
     }
 
     /**

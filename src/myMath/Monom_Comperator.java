@@ -2,6 +2,10 @@ package myMath;
 
 import java.util.Comparator;
 
+/**
+ * This Class will define how to compare between two Monoms.
+ * receives two monoms and returns -1 if the first monom is greater than the second one, and 1 otherwise.
+*/
 public class Monom_Comperator implements Comparator<Monom> {
 
 
