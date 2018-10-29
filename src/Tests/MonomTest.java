@@ -13,17 +13,17 @@ public class MonomTest {
 	@Test
 	public void testMonomDoubleInt() {
 		Monom m1 = new Monom(1.22,2);
-		if(!m1.isValidMonom()) {
-			fail("JUnit fail: Somthing is wrong with the Monom construction or isValidMonom method");
+		if(!(m1.get_power()>=0)) {
+            fail("JUnit fail: Somthing is wrong with the Monom construction method");
 		}
 	}
 
 	@Test
 	public void testMonomMonom() {
-		Monom m1 = new Monom(1.22,2);
-		Monom m2 = new Monom(m1);
+        Monom m1 = new Monom(1.22, 2);
+        Monom m2 = new Monom(m1);
 		if(!m1.equals(m2)) {
-			fail("JUnit fail: Somthing is wrong with the Monom copy construction or equals method");
+            fail("JUnit fail: Somthing is wrong with the Monom copy construction or equals method");
 		}
 	}
 	@Test
@@ -46,7 +46,7 @@ public class MonomTest {
 				"-3.3*x", "4*x^55", "0*x^5"};
 		for(int i=0;i<s.length;i++) {
 			Monom m = new Monom(s[i]);
-			if(!m.isValidMonom()) {
+			if(!(m.get_power()>=0)) {
 				fail("Something is wrong with the String Constructor of the Monom! fail on: "+s[i]);
 			}
 		}
