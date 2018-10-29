@@ -64,7 +64,7 @@ public class MonomTest {
 			try {
 				Monom m = new Monom(s[i]);
 				fail("Something is wrong with the String Constructor of the Monom! fail on: "+s[i]);
-			}	
+			}
 			catch (Exception e) {
 				// all OK
 			}
