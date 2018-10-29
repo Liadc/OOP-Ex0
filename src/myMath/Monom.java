@@ -45,7 +45,7 @@ public class Monom implements function{
 	    this._power =0;
 	    this._coefficient=0;
 	    if(!isValidMonom(s)){
-            throw new RuntimeException("Monom with illegal syntax");
+            throw new RuntimeException("Monom with illegal syntax: "+s);
         }
         else {
             s = s.toLowerCase();

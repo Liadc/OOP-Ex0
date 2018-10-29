@@ -24,7 +24,6 @@ public class Polynom implements Polynom_able {
      */
     public Polynom() {
         poly = new ArrayList<>();
-        poly.add(new Monom(0, 0));
     }
 
     /**
@@ -87,6 +86,11 @@ public class Polynom implements Polynom_able {
 		return this.poly.size();
 	}
 
+    /**
+     * This function will calculate a variable X (double) using the polynom's values, and returns the answer as double.
+     * @param x the variable to perform all monom's calculations on.
+     * @return the calculated value answer.
+     */
     @Override
     public double f(double x) {
         double sum = 0;
@@ -98,6 +102,10 @@ public class Polynom implements Polynom_able {
         return sum;
     }
 
+    /**
+     * This function will receive another Polynom and add it to the current polynom.
+     * @param p1 polynom to add to the current one.
+     */
     @Override
     public void add(Polynom_able p1) {
         Iterator<Monom> pointer = p1.iteretor();
@@ -108,6 +116,11 @@ public class Polynom implements Polynom_able {
         this.fixzero(); //never used, just to make sure.
     }
 
+    /**
+     * This function will receive a Monom and add it to the current polynom. if the power of the Monom is equal to another
+     * monom inside the current polynom, it will add the coefficient, otherwise it will add it as another new Monom.
+     * @param m1 Monom to add to the current polynom.
+     */
     @Override
     public void add(Monom m1) {
         boolean check = true;
@@ -126,6 +139,11 @@ public class Polynom implements Polynom_able {
         fixzero();
     }
 
+    /**
+     * This function will receive another polynom p1 and substract it from the current polynom.
+     * (multiply by -1, then perform add method).
+     * @param p1 polynom to substract
+     */
     @Override
     public void substract(Polynom_able p1) {
         Polynom_able minus1 = new Polynom("-1");
@@ -134,6 +152,11 @@ public class Polynom implements Polynom_able {
         this.add(p2);
     }
 
+    /**
+     * This function will receive another polynom and perform multiplication of the current one with the other one.
+     * The method will change the current polynom to the result of the multiplication.
+     * @param p1 polynom to multiply the current polynom with.
+     */
     @Override
     public void multiply(Polynom_able p1) {
         Polynom_able polycopy = this.copy();
@@ -153,14 +176,23 @@ public class Polynom implements Polynom_able {
         this.fixzero();
     }
 
+    /**
+     * This function will check whether the current polynom has any monoms inside it. returns True if it does,
+     * false otherwise.
+     * @return Boolean, true if current polynom has at least one monom, false otherwise.
+     */
     @Override
     public boolean isZero() {
         // TODO Auto-generated method stub
         //this.fixzero();
-        if (this.get_size() == 0) return true; //WORK ON IT
+        if (this.get_size() == 0) return true;
         return false;
     }
 
+    /**
+     * This function will generate a derivative from the current polynom, and returns the derivative polynom.
+     * @return Polynom_able, the derivative of the current polynom.
+     */
     @Override
     public Polynom_able derivative() {
         // TODO Auto-generated method stub
@@ -175,6 +207,14 @@ public class Polynom implements Polynom_able {
         return out;
     }
 
+    /**
+     * This function will receive two boundaries x1 and x0 (double), and an EPS, and finds the root of the current
+     * polynom within the area between x0 and x1 with eps=epsilon error margin. Assuming x1>x0, and f(x0)*f(x1) <0.
+     * @param x0 starting point. (double)
+     * @param x1 end point. (double)
+     * @param eps step (positive) value. the error margin accepted must be equals or less than this value.
+     * @return the x value where f(x) is 0, with EPS (epsilon) error margin.
+     */
     @Override
     public double root(double x0, double x1, double eps) {
         if (this.f(x0) * this.f(x1) < 0) {
@@ -196,6 +236,16 @@ public class Polynom implements Polynom_able {
         throw new RuntimeException("f(x0)*f(x1) >0");
     }
 
+    /**
+     * This function will receive two boundaries x1 and x0 (double), and an EPS, and calculates the area between
+     * the polynom to the X-axis (only positive area). assuming x1 > x0.
+     * Compute Riemann's Integral over this Polynom starting from x0, till x1 using eps size steps,
+     * see: https://en.wikipedia.org/wiki/Riemann_integral
+     * @param x0 double, starting point.
+     * @param x1 double, end point.
+     * @param eps double, the size steps for each Riemann's sum rectangle.
+     * @return the approximated area above the x-axis below this Polynom and between the [x0,x1] range.
+     */
     @Override
     public double area(double x0, double x1, double eps) {
         double totalwidth = (x1 - x0);
@@ -211,6 +261,11 @@ public class Polynom implements Polynom_able {
         return sum;
     }
 
+    /**
+     * This function receives another polynom p1 and returns true iff the current polynom has the same Monoms as the current one.
+     * @param p1 polynom to equals the current polynom to.
+     * @return true iff the current polynom has the same Monom as the current one, false otherwise.
+     */
     @Override
     public boolean equals(Polynom_able p1) {
         // TODO Auto-generated method stub
@@ -229,12 +284,20 @@ public class Polynom implements Polynom_able {
         return false;
     }
 
+    /**
+     * This function will return an iterator of the current polynom, so we can iterate through the Monoms.
+     * @return Iterator<Monom>, the iterator of the ArrayList.
+     */
     @Override
     public Iterator<Monom> iteretor() {
         // TODO Auto-generated method stub
         return poly.iterator();
     }
 
+    /**
+     * Overriding toString function: will return a String representing the current polynom. in the form of a1*x^b1+a2*x^b2...
+     * @return String, representing the current polynom. in the form of a1*x^b1+a2*x^b2...
+     */
     @Override
     public String toString() {
         String a = "";
@@ -242,26 +305,39 @@ public class Polynom implements Polynom_able {
         while (iterator.hasNext()) {
             Monom b = iterator.next();
             a = a + b;
-            if (iterator.hasNext()) a += "+";
+            if (iterator.hasNext())
+                a += "+";
         }
         return a.replaceAll("\\+-", "-");
     }
 
-
+    /**
+     * This method will clear all monoms from the polynom.
+     */
     private void clear() {
         poly.clear();
     }
 
+    /**
+     * This method will sort the polynom using Monom-Comperator class, starting with the highest power first.
+     */
     private void sort() {
         poly.sort(comp);
     }
 
     private static Comparator<Monom> comp = new Monom_Comperator();
 
+    /**
+     * This function will return how many Monoms are currently inside the polynom.
+     * @return Integer, the number of monoms inside the polynom.
+     */
     public int get_size() {
         return poly.size();
     }
 
+    /**
+     * This function will search for a monom which is equal to 0 and removes it from the polynom. (0, 0*x, 0*x^4 ...)
+     */
     private void fixzero() {
         Iterator<Monom> runner = this.iteretor();
         while (runner.hasNext()) {
