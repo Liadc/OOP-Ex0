@@ -43,7 +43,7 @@ public class MonomTest {
 		int pow = 12;
 		Monom m1 = new Monom(coef, pow);
 		String[] s = {"x", "x^2", "12.3", "13.1x","5x^8","12*x","-2x^2","-2*x^2","-x^2","-x","22","3", "0","x^1",
-				"-3.3*x", "4*x^55", "0*x^5,"};
+				"-3.3*x", "4*x^55", "0*x^5"};
 		for(int i=0;i<s.length;i++) {
 			Monom m = new Monom(s[i]);
 			if(!m.isValidMonom()) {
