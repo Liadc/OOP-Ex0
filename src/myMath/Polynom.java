@@ -233,7 +233,7 @@ public class Polynom implements Polynom_able {
             }
             return mid;
         }
-        throw new RuntimeException("f(x0)*f(x1) >0");
+        else throw new RuntimeException("f(x0)*f(x1) >0");
     }
 
     /**

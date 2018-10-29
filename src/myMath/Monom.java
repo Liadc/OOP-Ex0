@@ -79,6 +79,7 @@ public class Monom implements function{
                         }
                     }
                 } else { //does not contains ^
+                    this.set_power(1);
                     if (s.contains("*")) {
                         String coef = s.substring(0, s.indexOf("*"));
                         if (coef.length() > 0 && isDouble(coef)) {
