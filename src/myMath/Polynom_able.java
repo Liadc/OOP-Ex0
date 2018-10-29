@@ -89,8 +89,8 @@ public interface Polynom_able extends cont_function{
 	 */
 	public double area(double x0,double x1, double eps);
 	/**
-	 * @return an Iterator (of Monoms) over this Polynom
-	 * @return the iterator
+	 * This function will return an iterator of the current polynom, so we can iterate through the Monoms.
+	 * @return Iterator (of type Monom), the iterator of the ArrayList.
 	 */
 	public Iterator<Monom> iteretor();
 
