@@ -9,7 +9,7 @@ import org.junit.Test;
 import myMath.Monom;
 
 public class MonomTest {
-	public final static double EPS = 0.0000001;
+	public final static double EPS = 0.00001;
 	@Test
 	public void testMonomDoubleInt() {
 		Monom m1 = new Monom(1.22,2);

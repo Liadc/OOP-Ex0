@@ -206,13 +206,13 @@ public class PolynomTest {
         double p1area = p1.area(0, 10, MonomTest.EPS);
         double p2area = p2.area(0, 7, MonomTest.EPS);
         double p3area = p3.area(0,10,MonomTest.EPS);
-        double p4area = p3.area(2,10,MonomTest.EPS*100);
+        double p4area = p3.area(2,10,MonomTest.EPS);
         double p3suggetresult = 2290.75;
-        assertEquals("p1 area from 3 to 10 should be the same as p2 area from 0 to 7 ", p1area, p2area, MonomTest.EPS);
+        assertEquals("p1 area from 3 to 10 should be the same as p2 area from 0 to 7 ", p1area, p2area, MonomTest.EPS*100);
 
-        assertEquals("p3 area from 0 to 10 should be the same as p4 area from 2 to 10 ", p3area, p4area, MonomTest.EPS);
+        assertEquals("p3 area from 0 to 10 should be the same as p4 area from 2 to 10 ", p3area, p4area, MonomTest.EPS*100);
 
-        assertEquals("p3 isnt his suggest result ", p3suggetresult, p3area, MonomTest.EPS/10);
+        assertEquals("p3 isnt his suggest result ", p3suggetresult, p3area, MonomTest.EPS*1000);
 
     }
 
