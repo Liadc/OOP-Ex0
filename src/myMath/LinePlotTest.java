@@ -36,9 +36,7 @@ public class LinePlotTest extends JFrame {
 
         XYPlot plot = new XYPlot(data,data2);
         String kitonzs = kitzon.toString();
-        System.out.println(kitonzs);
         kitonzs = kitonzs.replaceAll(", ",",   ");
-        System.out.println(kitonzs);
         plot.getAxisRenderer(XYPlot.AXIS_X).getLabel().setText(kitonzs);
         getContentPane().add(new InteractivePanel(plot));
         LineRenderer lines = new DefaultLineRenderer2D();
