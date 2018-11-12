@@ -100,5 +100,7 @@ public interface Polynom_able extends cont_function{
 	 * @return number of monoms in this Polynom
 	 */
 	public int get_size();
+
+	public void show2D(double x0,double x1);
 	
 }

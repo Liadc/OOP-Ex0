@@ -283,6 +283,15 @@ public class Polynom implements Polynom_able {
         return false;
     }
 
+
+
+    public void show2D(double x0,double x1){
+        LinePlotTest frame = new LinePlotTest(this,x0,x1);
+        frame.setVisible(true);
+    }
+
+
+
     /**
      * This function will return an iterator of the current polynom, so we can iterate through the Monoms.
      * @return Iterator (of type Monom), the iterator of the ArrayList.
