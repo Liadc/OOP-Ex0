@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class LinePlotTest extends JFrame {
     public LinePlotTest(Polynom_able pol, double x0, double x1) {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //will add listener for confirmation, so we do nothing on close.
         setTitle("Liad & Timor Polynom graph");
         setSize(600, 400);
         addWindowListener(new WindowAdapter() {
