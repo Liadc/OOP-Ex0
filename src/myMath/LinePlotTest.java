@@ -1,7 +1,7 @@
 package myMath;
 
 import de.erichseifert.gral.data.DataTable;
-import de.erichseifert.gral.graphics.Label;
+
 import de.erichseifert.gral.plots.XYPlot;
 import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
