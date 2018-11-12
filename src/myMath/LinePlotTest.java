@@ -10,6 +10,7 @@ import de.erichseifert.gral.ui.InteractivePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
@@ -25,7 +26,7 @@ public class LinePlotTest extends JFrame {
             double y = pol.f(x);
             data.add(x, y);
         }
-
+        ArrayList<String> kitzon = new ArrayList();
         DataTable data2 = new DataTable(Double.class, Double.class);
         Polynom_able pcopy = pol.copy();
         pcopy = pcopy.derivative();
@@ -33,11 +34,17 @@ public class LinePlotTest extends JFrame {
             double y = pol.f(x);
             if (pcopy.f(x)<0.017 && pcopy.f(x)>-0.017) {
                 data2.add(x, y);
+                String number = String.format("%.2f", x);
+                String results = String.format("%.2f", y);
+                kitzon.add("("+number + "," + results + ")");
             }
-        }
-
-
+       }
         XYPlot plot = new XYPlot(data,data2);
+        plot.getAxisRenderer(XYPlot.AXIS_X).getLabel().setText(kitonzs);
+        getContentPane().add(new InteractivePanel(plot));
+        LineRenderer lines = new DefaultLineRenderer2D();
+        String kitonzs = kitzon.toString();
+        kitonzs = kitonzs.replaceAll(", ",",   ");
         getContentPane().add(new InteractivePanel(plot));
         LineRenderer lines = new DefaultLineRenderer2D();
         plot.setLineRenderers(data, lines);
