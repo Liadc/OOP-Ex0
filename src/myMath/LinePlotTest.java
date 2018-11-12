@@ -8,6 +8,8 @@ import de.erichseifert.gral.ui.InteractivePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 
 public class LinePlotTest extends JFrame {
     public LinePlotTest(Polynom_able pol, double x0, double x1) {
@@ -15,24 +17,29 @@ public class LinePlotTest extends JFrame {
         setSize(600, 400);
         //Creates DataTables of Dots.
         DataTable data = new DataTable(Double.class, Double.class);
-        for (double x = x0; x <= x1; x += 0.35) {
+        for (double x = x0; x <= x1; x += 0.01) {
             double y = pol.f(x);
             data.add(x, y);
         }
-
+        ArrayList<String> kitzon = new ArrayList();
         DataTable data2 = new DataTable(Double.class, Double.class);
-        Polynom_able pcopy = pol.copy();
-        pcopy.derivative();
-        for (double x = x0; x <= x1; x += 0.001) {
+        Polynom_able pcopy = pol.copy().derivative();
+        for (double x = x0; x <= x1; x += 0.01) {
             double y = pol.f(x);
-            if (pcopy.f(x)<0.5 || pcopy.f(x)>-0.5) {
+            if(pcopy.f(x)<0.017 && pcopy.f(x)>-0.017) {
                 data2.add(x, y);
+                String number = String.format("%.2f", x);
+                String results = String.format("%.2f", y);
+                kitzon.add("("+number + "," + results + ")");
             }
-        }
+       }
 
-
-        XYPlot plot = new XYPlot(data);
-        XYPlot plot2 = new XYPlot(data2);
+        XYPlot plot = new XYPlot(data,data2);
+        String kitonzs = kitzon.toString();
+        System.out.println(kitonzs);
+        kitonzs = kitonzs.replaceAll(", ",",   ");
+        System.out.println(kitonzs);
+        plot.getAxisRenderer(XYPlot.AXIS_X).getLabel().setText(kitonzs);
         getContentPane().add(new InteractivePanel(plot));
         LineRenderer lines = new DefaultLineRenderer2D();
         plot.setLineRenderers(data, lines);
@@ -40,7 +47,7 @@ public class LinePlotTest extends JFrame {
         Color color2 = new Color(1.0f, 0.0f, 0.0f); //red green blue
         plot.getPointRenderers(data).get(0).setColor(color1);
         plot.getLineRenderers(data).get(0).setColor(color1);
-       plot2.getPointRenderers(data2).get(0).setColor(color2);
+        plot.getPointRenderers(data2).get(0).setColor(color2);
     }
 
 }
