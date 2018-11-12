@@ -59,8 +59,10 @@ public class LinePlotTest extends JFrame {
         kitonzs = kitonzs.replaceAll(", ",",   ");
         plot.getAxisRenderer(XYPlot.AXIS_X).getLabel().setText(kitonzs);
         plot.getAxisRenderer(XYPlot.AXIS_X).getLabel().setColor(whiteColor);
+        plot.getAxisRenderer(XYPlot.AXIS_X).setShapeColor(whiteColor); //coloring X axis
+        plot.getAxisRenderer(XYPlot.AXIS_Y).setShapeColor(whiteColor);//coloring Y axis
         plot.getAxisRenderer(XYPlot.AXIS_X).setMinorTickColor(whiteColor); //coloring x axis ticks .
-        plot.getAxisRenderer(XYPlot.AXIS_Y).setMinorTickColor(whiteColor);
+        plot.getAxisRenderer(XYPlot.AXIS_Y).setMinorTickColor(whiteColor);//coloring y axis ticks .
         getContentPane().add(new InteractivePanel(plot));
         LineRenderer lines = new DefaultLineRenderer2D();
         plot.setLineRenderers(data, lines);
