@@ -1,6 +1,6 @@
 package Tests;
 /**
- * This is a simple example of Adding JUnit to the Monom class
+ * This is a test class using JUnit for the Monom class. some of these tests were inspired by: https://github.com/benmoshe/Polynoms/tree/master/src/Tests
  */
 import static org.junit.Assert.*;
 
