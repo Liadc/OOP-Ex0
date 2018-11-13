@@ -13,6 +13,11 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
+/**
+ * This class will show a graph and plot the polynom to the screen, mark and print the extreme points of the graph,
+ * and print the X,Y data of these points on the graph.
+ * This graphing tool is based on and uses GRAL library, as seen on https://github.com/eseifert/gral .
+ */
 public class LinePlotTest extends JFrame {
     public LinePlotTest(Polynom_able pol, double x0, double x1) {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //will add listener for confirmation, so we do nothing on close.

@@ -1,6 +1,6 @@
 package Tests;
 /**
- * This Junit class - is not complete and should contains additional testing functionality - should be written by the OOP students.
+ * This is a test class using JUnit for the Polynom class. some of these tests were inspired by: https://github.com/benmoshe/Polynoms/tree/master/src/Tests
  */
 
 import static org.junit.Assert.*;
